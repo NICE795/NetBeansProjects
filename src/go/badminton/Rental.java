@@ -6,11 +6,18 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class Rental extends javax.swing.JFrame {
 
     public Rental() {
         initComponents();
+        setTitle("Halaman Utama Rental");
+        setSize(1705, 999);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // Center the frame
     }
 
     /**
@@ -53,23 +60,20 @@ public class Rental extends javax.swing.JFrame {
         Durasi_Sewa = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        Clear = new javax.swing.JButton();
-        Konfrimasi_Sewa = new javax.swing.JButton();
-        Show_Details = new javax.swing.JButton();
-        Bayar = new javax.swing.JButton();
-        Save = new javax.swing.JButton();
+        Save = new go.Custom.ButtonCustom();
+        Reset = new go.Custom.ButtonCustom();
+        Clear = new go.Custom.ButtonCustom();
+        Bayar = new go.Custom.ButtonCustom();
+        Konfirmasi_Sewa = new go.Custom.ButtonCustom();
+        Show_Detail = new go.Custom.ButtonCustom();
+        Exit = new go.Custom.ButtonCustom();
+        Delete = new go.Custom.ButtonCustom();
+        jLabel16 = new javax.swing.JLabel();
+        Update = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Data_Pemesanan = new javax.swing.JTable();
-        jPanel7 = new javax.swing.JPanel();
-        Delete = new javax.swing.JButton();
-        Update = new javax.swing.JButton();
-        Reset = new javax.swing.JButton();
-        Exit = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
-        jScrollBar1 = new javax.swing.JScrollBar();
-        jScrollBar2 = new javax.swing.JScrollBar();
         BG_hitam = new javax.swing.JLabel();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(12, 12, 12, 12, new java.awt.Color(51, 204, 255)));
@@ -123,11 +127,11 @@ public class Rental extends javax.swing.JFrame {
                 jLabel13ComponentAdded(evt);
             }
         });
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 130, 38));
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 130, 38));
 
         Pelanggan_Biasa.setForeground(new java.awt.Color(255, 255, 255));
         Pelanggan_Biasa.setText("Pelanggan Reguler");
-        jPanel5.add(Pelanggan_Biasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, -1));
+        jPanel5.add(Pelanggan_Biasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         Pelanggan_Member.setForeground(new java.awt.Color(255, 255, 255));
         Pelanggan_Member.setText("Pelanggan Member");
@@ -136,13 +140,13 @@ public class Rental extends javax.swing.JFrame {
                 Pelanggan_MemberActionPerformed(evt);
             }
         });
-        jPanel5.add(Pelanggan_Member, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
+        jPanel5.add(Pelanggan_Member, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setOpaque(true);
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 360, 220));
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 220));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 380, 240));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 290, 240));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(12, 12, 12, 12, new java.awt.Color(51, 204, 255)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -239,56 +243,154 @@ public class Rental extends javax.swing.JFrame {
         jLabel7.setOpaque(true);
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 770, 220));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 790, 240));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 790, 240));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createMatteBorder(12, 12, 12, 12, new java.awt.Color(51, 204, 255)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Clear.setText("Clear");
-        Clear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClearActionPerformed(evt);
-            }
-        });
-        jPanel4.add(Clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 120, -1));
-
-        Konfrimasi_Sewa.setText("Konfrimasi Sewa");
-        Konfrimasi_Sewa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Konfrimasi_SewaActionPerformed(evt);
-            }
-        });
-        jPanel4.add(Konfrimasi_Sewa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 120, -1));
-
-        Show_Details.setText("Show Details");
-        Show_Details.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Show_DetailsActionPerformed(evt);
-            }
-        });
-        jPanel4.add(Show_Details, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 120, -1));
-
-        Bayar.setText("Bayar");
-        Bayar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BayarActionPerformed(evt);
-            }
-        });
-        jPanel4.add(Bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 120, -1));
-
+        Save.setForeground(new java.awt.Color(255, 255, 255));
+        Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         Save.setText("Save");
+        Save.setColor(new java.awt.Color(51, 204, 255));
+        Save.setColorBorder(new java.awt.Color(0, 51, 255));
+        Save.setColorClick(new java.awt.Color(0, 0, 153));
+        Save.setColorOver(new java.awt.Color(51, 204, 255));
+        Save.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Save.setRadius(20);
         Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveActionPerformed(evt);
             }
         });
-        jPanel4.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 120, -1));
+        jPanel4.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 40));
+
+        Reset.setForeground(new java.awt.Color(255, 255, 255));
+        Reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reset.png"))); // NOI18N
+        Reset.setText("Reset");
+        Reset.setColor(new java.awt.Color(255, 0, 0));
+        Reset.setColorBorder(new java.awt.Color(204, 0, 0));
+        Reset.setColorClick(new java.awt.Color(204, 0, 0));
+        Reset.setColorOver(new java.awt.Color(255, 0, 0));
+        Reset.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Reset.setRadius(20);
+        Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 100, 40));
+
+        Clear.setForeground(new java.awt.Color(255, 255, 255));
+        Clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sapu.png"))); // NOI18N
+        Clear.setText("Clear");
+        Clear.setColor(new java.awt.Color(255, 178, 0));
+        Clear.setColorClick(new java.awt.Color(204, 102, 0));
+        Clear.setColorOver(new java.awt.Color(255, 178, 0));
+        Clear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Clear.setRadius(20);
+        Clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 100, 30));
+
+        Bayar.setForeground(new java.awt.Color(255, 255, 255));
+        Bayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/uang.png"))); // NOI18N
+        Bayar.setText("Bayar");
+        Bayar.setColor(new java.awt.Color(0, 204, 0));
+        Bayar.setColorBorder(new java.awt.Color(0, 102, 51));
+        Bayar.setColorClick(new java.awt.Color(0, 51, 51));
+        Bayar.setColorOver(new java.awt.Color(0, 204, 0));
+        Bayar.setRadius(20);
+        Bayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BayarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 100, 30));
+
+        Konfirmasi_Sewa.setForeground(new java.awt.Color(255, 255, 255));
+        Konfirmasi_Sewa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/centang.png"))); // NOI18N
+        Konfirmasi_Sewa.setText("Konfirmasi ");
+        Konfirmasi_Sewa.setColor(new java.awt.Color(102, 255, 102));
+        Konfirmasi_Sewa.setColorBorder(new java.awt.Color(0, 153, 0));
+        Konfirmasi_Sewa.setColorClick(new java.awt.Color(0, 102, 0));
+        Konfirmasi_Sewa.setColorOver(new java.awt.Color(102, 255, 102));
+        Konfirmasi_Sewa.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        Konfirmasi_Sewa.setRadius(20);
+        Konfirmasi_Sewa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Konfirmasi_SewaActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Konfirmasi_Sewa, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 140, 40));
+
+        Show_Detail.setForeground(new java.awt.Color(255, 255, 255));
+        Show_Detail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/detail.png"))); // NOI18N
+        Show_Detail.setText("Show Detail");
+        Show_Detail.setColor(new java.awt.Color(123, 211, 234));
+        Show_Detail.setColorBorder(new java.awt.Color(0, 153, 255));
+        Show_Detail.setColorClick(new java.awt.Color(51, 204, 255));
+        Show_Detail.setColorOver(new java.awt.Color(123, 211, 234));
+        Show_Detail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Show_Detail.setRadius(20);
+        Show_Detail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Show_DetailActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Show_Detail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 140, 40));
+
+        Exit.setForeground(new java.awt.Color(255, 255, 255));
+        Exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/exit.png"))); // NOI18N
+        Exit.setText("Exit");
+        Exit.setColor(new java.awt.Color(255, 0, 0));
+        Exit.setColorBorder(new java.awt.Color(204, 0, 51));
+        Exit.setColorClick(new java.awt.Color(204, 0, 0));
+        Exit.setColorOver(new java.awt.Color(255, 0, 0));
+        Exit.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Exit.setRadius(20);
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 140, 40));
+
+        Delete.setForeground(new java.awt.Color(255, 255, 255));
+        Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hapus.png"))); // NOI18N
+        Delete.setText("Delete");
+        Delete.setColor(new java.awt.Color(255, 0, 0));
+        Delete.setColorBorder(new java.awt.Color(255, 0, 0));
+        Delete.setColorClick(new java.awt.Color(153, 0, 0));
+        Delete.setColorOver(new java.awt.Color(255, 0, 0));
+        Delete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Delete.setRadius(20);
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 140, 40));
+
+        jLabel16.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel16.setOpaque(true);
+        jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 220));
+
+        Update.setText("Update");
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 80, -1));
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setOpaque(true);
-        jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 220));
+        jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 220));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 230, 200, 240));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 230, 300, 240));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createMatteBorder(12, 12, 12, 12, new java.awt.Color(51, 204, 255)));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -316,51 +418,6 @@ public class Rental extends javax.swing.JFrame {
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 1540, 220));
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createMatteBorder(12, 12, 12, 12, new java.awt.Color(51, 204, 255)));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        Delete.setText("Delete");
-        Delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteActionPerformed(evt);
-            }
-        });
-        jPanel7.add(Delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 80, -1));
-
-        Update.setText("Update");
-        Update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateActionPerformed(evt);
-            }
-        });
-        jPanel7.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 80, -1));
-
-        Reset.setText("Reset");
-        Reset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResetActionPerformed(evt);
-            }
-        });
-        jPanel7.add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 80, -1));
-
-        Exit.setText("Exit");
-        Exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
-            }
-        });
-        jPanel7.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 80, -1));
-
-        jLabel16.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel16.setOpaque(true);
-        jPanel7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 220));
-
-        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 230, 140, 240));
-        getContentPane().add(jScrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1560, -30, 20, 1040));
-
-        jScrollBar2.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
-        getContentPane().add(jScrollBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 790, 1560, 20));
-
         BG_hitam.setBackground(new java.awt.Color(0, 0, 0));
         BG_hitam.setOpaque(true);
         getContentPane().add(BG_hitam, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 2300, 1010));
@@ -377,64 +434,9 @@ public class Rental extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_LapanganActionPerformed
 
-    private void ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearActionPerformed
-        Pelanggan_Member.setSelected(false);
-        Pelanggan_Biasa.setSelected(false);
-        ID_Pelanggan.setText("");
-        Nama_Pelanggan.setText("");
-        Nomor_Hp.setText("");
-        Alamat.setText("");
-        Durasi_Sewa.setText("");
-        Lapangan.setSelectedItem("");
-        Harga.setText("");
-        
-        
-    }//GEN-LAST:event_ClearActionPerformed
-
-    private void Show_DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Show_DetailsActionPerformed
-        DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
-        model.addRow(new Object[]{Pelanggan_Member.isSelected(), Pelanggan_Biasa.isSelected(),
-            ID_Pelanggan.getText(), Nama_Pelanggan.getText(),
-            Nomor_Hp.getText(), Alamat.getText(), Harga.getText(), Lapangan.getSelectedItem(), Harga.getText(),toString(),});
-               
-    }//GEN-LAST:event_Show_DetailsActionPerformed
-
     private void LapanganPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_LapanganPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_LapanganPropertyChange
-
-    private void Konfrimasi_SewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Konfrimasi_SewaActionPerformed
-        JOptionPane.showMessageDialog(null, "Sewa Berhasil Di Komfrimasi", "", JOptionPane.OK_OPTION);
-        
-        DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
-        model.addRow(new Object[]{Pelanggan_Member.isSelected(), Pelanggan_Biasa.isSelected(),
-            ID_Pelanggan.getText(), Nama_Pelanggan.getText(),
-            Nomor_Hp.getText(), Alamat.getText(), Harga.getText(), Lapangan.getSelectedItem(), Harga.getText(),toString(),});
-    }//GEN-LAST:event_Konfrimasi_SewaActionPerformed
-
-    private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
-        DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
-        model.setRowCount(0);
-        
-        Pelanggan_Biasa.setSelected(false);
-        Pelanggan_Member.setSelected(false);
-                
-        ID_Pelanggan.setText("");
-        Nama_Pelanggan.setText("");
-        Nomor_Hp.setText("");
-        Alamat.setText("");
-        Durasi_Sewa.setText("");
-        Lapangan.setSelectedItem("");
-        Harga.setText("");
-        
-    }//GEN-LAST:event_ResetActionPerformed
-
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
-       frame = new JFrame ("Exit");
-       if (JOptionPane.showConfirmDialog(frame, "Confirm jika anda ingin keluar", "",JOptionPane.YES_NO_OPTION)== JOptionPane.YES_NO_OPTION) {
-       System.exit(0);
-       }
-    }//GEN-LAST:event_ExitActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
        DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
@@ -456,18 +458,6 @@ public class Rental extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Nomor_HpActionPerformed
 
-    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-        DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
-
-        if (Data_Pemesanan.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Tidak ada data yang harus dihapus", "", JOptionPane.OK_OPTION);
-        } else if (Data_Pemesanan.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null, "Pilih baris untuk dihapus", "", JOptionPane.OK_OPTION);
-        } else {
-            model.removeRow(Data_Pemesanan.getSelectedRow());
-        }
-    }//GEN-LAST:event_DeleteActionPerformed
-
     private void HargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HargaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_HargaActionPerformed
@@ -475,10 +465,6 @@ public class Rental extends javax.swing.JFrame {
     private void AlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlamatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AlamatActionPerformed
-
-    private void BayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BayarActionPerformed
-
-    }//GEN-LAST:event_BayarActionPerformed
 
     private void Durasi_SewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Durasi_SewaActionPerformed
         // TODO add your handling code here:
@@ -488,13 +474,98 @@ public class Rental extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseWheelMoved
 
+    private void Pelanggan_MemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pelanggan_MemberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Pelanggan_MemberActionPerformed
+
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
         JOptionPane.showMessageDialog(null, "Berhasil di save", "", JOptionPane.OK_CANCEL_OPTION);
     }//GEN-LAST:event_SaveActionPerformed
 
-    private void Pelanggan_MemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pelanggan_MemberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Pelanggan_MemberActionPerformed
+    private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
+                                                 
+        DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
+        model.setRowCount(0);
+        
+        Pelanggan_Biasa.setSelected(false);
+        Pelanggan_Member.setSelected(false);
+                
+        ID_Pelanggan.setText("");
+        Nama_Pelanggan.setText("");
+        Nomor_Hp.setText("");
+        Alamat.setText("");
+        Durasi_Sewa.setText("");
+        Lapangan.setSelectedItem("");
+        Harga.setText("");
+        
+    
+    }//GEN-LAST:event_ResetActionPerformed
+
+    private void ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearActionPerformed
+                                                 
+        Pelanggan_Member.setSelected(false);
+        Pelanggan_Biasa.setSelected(false);
+        ID_Pelanggan.setText("");
+        Nama_Pelanggan.setText("");
+        Nomor_Hp.setText("");
+        Alamat.setText("");
+        Durasi_Sewa.setText("");
+        Lapangan.setSelectedItem("");
+        Harga.setText("");
+
+    }//GEN-LAST:event_ClearActionPerformed
+
+    private void Show_DetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Show_DetailActionPerformed
+                                                        
+        DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
+        model.addRow(new Object[]{Pelanggan_Member.isSelected(), Pelanggan_Biasa.isSelected(),
+            ID_Pelanggan.getText(), Nama_Pelanggan.getText(),
+            Nomor_Hp.getText(), Alamat.getText(), Harga.getText(), Lapangan.getSelectedItem(), Harga.getText(),toString(),});
+
+    
+    }//GEN-LAST:event_Show_DetailActionPerformed
+
+    private void BayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BayarActionPerformed
+                                              
+    pembayaran pembayaranPage = new pembayaran();
+    pembayaranPage.setVisible(true);
+    this.dispose(); // Menutup halaman saat ini jika diperlukan
+
+    }//GEN-LAST:event_BayarActionPerformed
+
+    private void Konfirmasi_SewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Konfirmasi_SewaActionPerformed
+
+        JOptionPane.showMessageDialog(null, "Sewa Berhasil Di Komfrimasi", "", JOptionPane.OK_OPTION);
+
+        DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
+        model.addRow(new Object[]{Pelanggan_Member.isSelected(), Pelanggan_Biasa.isSelected(),
+            ID_Pelanggan.getText(), Nama_Pelanggan.getText(),
+            Nomor_Hp.getText(), Alamat.getText(), Harga.getText(), Lapangan.getSelectedItem(), Harga.getText(),toString(),});
+
+    }//GEN-LAST:event_Konfirmasi_SewaActionPerformed
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+                                                 
+       frame = new JFrame ("Exit");
+       if (JOptionPane.showConfirmDialog(frame, "Confirm jika anda ingin keluar", "",JOptionPane.YES_NO_OPTION)== JOptionPane.YES_NO_OPTION) {
+       System.exit(0);
+       }
+    
+    }//GEN-LAST:event_ExitActionPerformed
+
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+                                                  
+        DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
+
+        if (Data_Pemesanan.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Tidak ada data yang harus dihapus", "", JOptionPane.OK_OPTION);
+        } else if (Data_Pemesanan.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Pilih baris untuk dihapus", "", JOptionPane.OK_OPTION);
+        } else {
+            model.removeRow(Data_Pemesanan.getSelectedRow());
+        }
+      
+    }//GEN-LAST:event_DeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -534,23 +605,23 @@ public class Rental extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Alamat;
     private javax.swing.JLabel BG_hitam;
-    private javax.swing.JButton Bayar;
-    private javax.swing.JButton Clear;
+    private go.Custom.ButtonCustom Bayar;
+    private go.Custom.ButtonCustom Clear;
     private javax.swing.JTable Data_Pemesanan;
-    private javax.swing.JButton Delete;
+    private go.Custom.ButtonCustom Delete;
     private javax.swing.JTextField Durasi_Sewa;
-    private javax.swing.JButton Exit;
+    private go.Custom.ButtonCustom Exit;
     private javax.swing.JTextField Harga;
     private javax.swing.JTextField ID_Pelanggan;
-    private javax.swing.JButton Konfrimasi_Sewa;
+    private go.Custom.ButtonCustom Konfirmasi_Sewa;
     private javax.swing.JComboBox<String> Lapangan;
     private javax.swing.JTextField Nama_Pelanggan;
     private javax.swing.JTextField Nomor_Hp;
     private javax.swing.JCheckBox Pelanggan_Biasa;
     private javax.swing.JCheckBox Pelanggan_Member;
-    private javax.swing.JButton Reset;
-    private javax.swing.JButton Save;
-    private javax.swing.JButton Show_Details;
+    private go.Custom.ButtonCustom Reset;
+    private go.Custom.ButtonCustom Save;
+    private go.Custom.ButtonCustom Show_Detail;
     private javax.swing.JButton Update;
     private javax.swing.JLabel durasi_sewa1;
     private javax.swing.JLabel harga;
@@ -575,9 +646,6 @@ public class Rental extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollBar jScrollBar1;
-    private javax.swing.JScrollBar jScrollBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jenis_lapangan;
     // End of variables declaration//GEN-END:variables

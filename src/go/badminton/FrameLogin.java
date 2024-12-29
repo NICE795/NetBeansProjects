@@ -4,10 +4,12 @@
  */
 package go.badminton;
 
-/**
- *
- * @author bayuw
- */
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class FrameLogin extends javax.swing.JFrame {
 
     int xx, xy;
@@ -32,6 +34,7 @@ public class FrameLogin extends javax.swing.JFrame {
         Password = new go.Custom.TextFieldCustom();
         Login = new go.Custom.ButtonCustom();
         Username = new go.Custom.TextFieldCustom();
+        Keluar = new go.Custom.ButtonCustom();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,7 +69,7 @@ public class FrameLogin extends javax.swing.JFrame {
         silahkan_login.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         silahkan_login.setForeground(new java.awt.Color(255, 255, 255));
         silahkan_login.setText("LOGIN ADMIN");
-        panelCustom1.add(silahkan_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 50, 170, 50));
+        panelCustom1.add(silahkan_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 140, 50));
 
         username.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         username.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,21 +78,52 @@ public class FrameLogin extends javax.swing.JFrame {
 
         Password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Password.setRadius(20);
+        Password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordActionPerformed(evt);
+            }
+        });
         panelCustom1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 280, 40));
 
         Login.setBackground(new java.awt.Color(60, 85, 45));
         Login.setForeground(new java.awt.Color(255, 255, 255));
         Login.setText("LOGIN");
+        Login.setColor(new java.awt.Color(60, 85, 45));
         Login.setColorBorder(new java.awt.Color(60, 85, 45));
-        Login.setColorClick(new java.awt.Color(60, 85, 45));
+        Login.setColorClick(new java.awt.Color(0, 51, 0));
         Login.setColorOver(new java.awt.Color(60, 85, 45));
         Login.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Login.setRadius(30);
-        panelCustom1.add(Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 150, 50));
+        Login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginActionPerformed(evt);
+            }
+        });
+        panelCustom1.add(Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 150, 50));
 
         Username.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Username.setRadius(20);
+        Username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsernameActionPerformed(evt);
+            }
+        });
         panelCustom1.add(Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 280, 40));
+
+        Keluar.setForeground(new java.awt.Color(255, 255, 255));
+        Keluar.setText("Keluar");
+        Keluar.setColor(new java.awt.Color(255, 0, 0));
+        Keluar.setColorBorder(new java.awt.Color(255, 0, 0));
+        Keluar.setColorClick(new java.awt.Color(153, 0, 0));
+        Keluar.setColorOver(new java.awt.Color(204, 0, 0));
+        Keluar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Keluar.setRadius(30);
+        Keluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KeluarActionPerformed(evt);
+            }
+        });
+        panelCustom1.add(Keluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 150, 50));
 
         jPanel1.add(panelCustom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 590, 410));
 
@@ -110,9 +144,85 @@ public class FrameLogin extends javax.swing.JFrame {
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        this.setLocation(x = xx, y - xy);
+        this.setLocation(x - xx, y - xy);
     
     }//GEN-LAST:event_formMouseDragged
+
+    private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameActionPerformed
+                                                
+    if (Username.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Username harus diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+    } else {
+        // TODO add your handling code here:
+    }
+
+
+    }//GEN-LAST:event_UsernameActionPerformed
+
+    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
+                                       
+    if (Password.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Password harus diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+    } else {
+        String inputPassword = Password.getText().trim();
+        String correctPassword = "yourCorrectPassword"; // Ganti dengan password yang benar
+
+        if (!inputPassword.equals(correctPassword)) {
+            JOptionPane.showMessageDialog(this, "Password salah", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // TODO add your handling code here jika password benar
+        }
+    }
+
+
+    }//GEN-LAST:event_PasswordActionPerformed
+
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+                                    
+    String username = Username.getText().trim();
+    String password = new String(Password.getText()).trim();
+    
+    if (username.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Username harus diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    if (password.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Password harus diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    try {
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourDatabase", "username", "password");
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1, username);
+        pst.setString(2, password);
+        ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()) {
+            // Login berhasil, buka halaman Rental.java
+            JOptionPane.showMessageDialog(this, "Login berhasil!");
+            Rental rentalPage = new Rental();
+            rentalPage.setVisible(true);
+            this.dispose(); // Menutup halaman login saat ini
+        } else {
+            // Login gagal
+            JOptionPane.showMessageDialog(this, "Username atau password salah", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menghubungi database", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_LoginActionPerformed
+
+    private void KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeluarActionPerformed
+    MenuUtama menuUtama = new MenuUtama();
+    menuUtama.setVisible(true);
+
+
+    }//GEN-LAST:event_KeluarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,6 +260,7 @@ public class FrameLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private go.Custom.ButtonCustom Keluar;
     private go.Custom.ButtonCustom Login;
     private go.Custom.TextFieldCustom Password;
     private go.Custom.TextFieldCustom Username;
