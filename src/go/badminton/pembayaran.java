@@ -18,6 +18,8 @@ public class pembayaran extends javax.swing.JFrame {
     double totalPembayaran = 0;
     double uangDiberikan = 0;
     double kembalian = 0;
+    private double hargaMember = 320000;
+    private double hargaRegular = 50000;
 
     public pembayaran() {
         initComponents();
@@ -43,8 +45,9 @@ public class pembayaran extends javax.swing.JFrame {
         Tabel_Detail = new javax.swing.JTable();
         Jenis_Pelanggan = new javax.swing.JComboBox<>();
         Show_Detail = new go.Custom.ButtonCustom();
-        Konfirmasi_Pembayaran = new go.Custom.ButtonCustom();
         Hitung_Pembayaran = new go.Custom.ButtonCustom();
+        Konfirmasi_Pembayaran = new go.Custom.ButtonCustom();
+        Kembali = new go.Custom.ButtonCustom();
         Hapus = new go.Custom.ButtonCustom();
         Nama_Pelanggan = new go.Custom.TextFieldCustom();
         UangDiberikan = new go.Custom.TextFieldCustom();
@@ -53,19 +56,18 @@ public class pembayaran extends javax.swing.JFrame {
         ID_Pelanggan = new go.Custom.TextFieldCustom();
         Tanggal = new go.Custom.TextFieldCustom();
         panelCustom1 = new go.Custom.PanelCustom();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         bingkaicoklat1 = new javax.swing.JLabel();
         bingkaicoklat2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,8 +88,8 @@ public class pembayaran extends javax.swing.JFrame {
 
         total_pembayaran.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         total_pembayaran.setForeground(new java.awt.Color(255, 255, 255));
-        total_pembayaran.setText("Jumlah Uang Diberikan  :");
-        Pembayaran.add(total_pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, -1, -1));
+        total_pembayaran.setText("Jumlah Uang Diberikan    :");
+        Pembayaran.add(total_pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, -1, -1));
 
         pilih_pembayaran.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         pilih_pembayaran.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,13 +103,13 @@ public class pembayaran extends javax.swing.JFrame {
 
         tanggal_dan_waktu_pembayaran1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tanggal_dan_waktu_pembayaran1.setForeground(new java.awt.Color(255, 255, 255));
-        tanggal_dan_waktu_pembayaran1.setText("Tanggal & Waktu Bayar :");
-        Pembayaran.add(tanggal_dan_waktu_pembayaran1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, -1));
+        tanggal_dan_waktu_pembayaran1.setText("Tanggal & Waktu Bayar   :");
+        Pembayaran.add(tanggal_dan_waktu_pembayaran1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
 
         jumlah_uang.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jumlah_uang.setForeground(new java.awt.Color(255, 255, 255));
-        jumlah_uang.setText("Total Pembayaran           :");
-        Pembayaran.add(jumlah_uang, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, -1, -1));
+        jumlah_uang.setText("Total Pembayaran             :");
+        Pembayaran.add(jumlah_uang, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
 
         nama_lapangan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         nama_lapangan.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,8 +123,8 @@ public class pembayaran extends javax.swing.JFrame {
 
         uang_kembalian.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         uang_kembalian.setForeground(new java.awt.Color(255, 255, 255));
-        uang_kembalian.setText("Kembalian                         :");
-        Pembayaran.add(uang_kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, 190, 30));
+        uang_kembalian.setText("Kembalian                           :");
+        Pembayaran.add(uang_kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 190, 30));
 
         Tabel_Detail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,38 +157,84 @@ public class pembayaran extends javax.swing.JFrame {
         });
         Pembayaran.add(Jenis_Pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, 80, 20));
 
+        Show_Detail.setForeground(new java.awt.Color(255, 255, 255));
+        Show_Detail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/detail.png"))); // NOI18N
         Show_Detail.setText("Show Detail");
+        Show_Detail.setColor(new java.awt.Color(170, 179, 150));
+        Show_Detail.setColorBorder(new java.awt.Color(102, 102, 102));
+        Show_Detail.setColorClick(new java.awt.Color(102, 102, 102));
+        Show_Detail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Show_Detail.setRadius(20);
         Show_Detail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Show_DetailActionPerformed(evt);
             }
         });
-        Pembayaran.add(Show_Detail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 150, 30));
+        Pembayaran.add(Show_Detail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 640, 150, 40));
 
-        Konfirmasi_Pembayaran.setText("Konfirmasi Pembayaran");
-        Konfirmasi_Pembayaran.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Konfirmasi_PembayaranActionPerformed(evt);
-            }
-        });
-        Pembayaran.add(Konfirmasi_Pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 650, -1, 30));
-
-        Hitung_Pembayaran.setText("Hitung Pembayaran");
+        Hitung_Pembayaran.setForeground(new java.awt.Color(255, 255, 255));
+        Hitung_Pembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/kalkulator.png"))); // NOI18N
+        Hitung_Pembayaran.setText("hitung");
+        Hitung_Pembayaran.setColor(new java.awt.Color(204, 204, 204));
+        Hitung_Pembayaran.setColorBorder(new java.awt.Color(153, 153, 153));
+        Hitung_Pembayaran.setColorClick(new java.awt.Color(102, 102, 102));
+        Hitung_Pembayaran.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Hitung_Pembayaran.setRadius(20);
         Hitung_Pembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Hitung_PembayaranActionPerformed(evt);
             }
         });
-        Pembayaran.add(Hitung_Pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 650, 150, 30));
+        Pembayaran.add(Hitung_Pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 640, 150, 40));
 
+        Konfirmasi_Pembayaran.setForeground(new java.awt.Color(255, 255, 255));
+        Konfirmasi_Pembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/centang.png"))); // NOI18N
+        Konfirmasi_Pembayaran.setText("Konfirmasi Pembayaran");
+        Konfirmasi_Pembayaran.setColor(new java.awt.Color(92, 179, 56));
+        Konfirmasi_Pembayaran.setColorBorder(new java.awt.Color(0, 102, 0));
+        Konfirmasi_Pembayaran.setColorClick(new java.awt.Color(0, 102, 0));
+        Konfirmasi_Pembayaran.setColorOver(new java.awt.Color(92, 179, 56));
+        Konfirmasi_Pembayaran.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Konfirmasi_Pembayaran.setRadius(20);
+        Konfirmasi_Pembayaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Konfirmasi_PembayaranActionPerformed(evt);
+            }
+        });
+        Pembayaran.add(Konfirmasi_Pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 640, -1, 40));
+
+        Kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/keluar.png"))); // NOI18N
+        Kembali.setText("Kembali");
+        Kembali.setColor(new java.awt.Color(153, 255, 255));
+        Kembali.setColorBorder(new java.awt.Color(51, 204, 255));
+        Kembali.setColorClick(new java.awt.Color(0, 204, 204));
+        Kembali.setColorOver(new java.awt.Color(153, 255, 255));
+        Kembali.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Kembali.setRadius(20);
+        Kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KembaliActionPerformed(evt);
+            }
+        });
+        Pembayaran.add(Kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 640, 140, 40));
+
+        Hapus.setForeground(new java.awt.Color(255, 255, 255));
+        Hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hapus.png"))); // NOI18N
         Hapus.setText("Hapus");
+        Hapus.setColor(new java.awt.Color(255, 0, 0));
+        Hapus.setColorBorder(new java.awt.Color(204, 0, 0));
+        Hapus.setColorClick(new java.awt.Color(153, 0, 0));
+        Hapus.setColorOver(new java.awt.Color(255, 0, 0));
+        Hapus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Hapus.setRadius(20);
         Hapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HapusActionPerformed(evt);
             }
         });
-        Pembayaran.add(Hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 650, 90, 30));
+        Pembayaran.add(Hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 640, 120, 40));
 
+        Nama_Pelanggan.setRadius(20);
         Nama_Pelanggan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Nama_PelangganActionPerformed(evt);
@@ -194,29 +242,80 @@ public class pembayaran extends javax.swing.JFrame {
         });
         Pembayaran.add(Nama_Pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 210, 40));
 
+        UangDiberikan.setRadius(20);
         UangDiberikan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UangDiberikanActionPerformed(evt);
             }
         });
-        Pembayaran.add(UangDiberikan, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 540, 210, 40));
+        Pembayaran.add(UangDiberikan, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 530, 210, 40));
 
+        Bayar.setRadius(20);
         Bayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BayarActionPerformed(evt);
             }
         });
-        Pembayaran.add(Bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, 210, 40));
+        Pembayaran.add(Bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, 210, 40));
 
+        Kembalian.setRadius(20);
         Kembalian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 KembalianActionPerformed(evt);
             }
         });
-        Pembayaran.add(Kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 590, 210, 40));
+        Pembayaran.add(Kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 580, 210, 40));
+
+        ID_Pelanggan.setRadius(20);
         Pembayaran.add(ID_Pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 210, 40));
-        Pembayaran.add(Tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 210, 40));
-        Pembayaran.add(panelCustom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 390, 250, 230));
+
+        Tanggal.setRadius(20);
+        Pembayaran.add(Tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 210, 40));
+
+        panelCustom1.setBackground(new java.awt.Color(255, 240, 220));
+        panelCustom1.setRoundBottomLeft(20);
+        panelCustom1.setRoundBottomRight(20);
+        panelCustom1.setRoundTopLeft(20);
+        panelCustom1.setRoundTopRight(20);
+        panelCustom1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("- Free 3 Shuttlecock ");
+        panelCustom1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 370, 20));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setText("Benefit Member    :");
+        panelCustom1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 300, 20));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setText("- Free 1 Aqua 1L");
+        panelCustom1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 120, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("- Free Peminjaman 2 Raket");
+        panelCustom1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 170, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("Pelanggan Reguler        : 50.000 / 1 jam");
+        panelCustom1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 240, -1));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setText("Benefit Reguler     :");
+        panelCustom1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 120, 20));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Pelanggan Member      : 320.000 / Bulan 8X 2 jam");
+        panelCustom1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, 30));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("- Free 1 Aqua 350ml");
+        panelCustom1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 130, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("- Free 1 Shuttlecock");
+        panelCustom1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        Pembayaran.add(panelCustom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, 390, 210));
 
         bingkaicoklat1.setBorder(javax.swing.BorderFactory.createMatteBorder(12, 12, 12, 12, new java.awt.Color(153, 51, 0)));
         Pembayaran.add(bingkaicoklat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 870, 570));
@@ -227,97 +326,31 @@ public class pembayaran extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/raketK.png"))); // NOI18N
         Pembayaran.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, 700));
 
-        jLabel5.setBorder(javax.swing.BorderFactory.createMatteBorder(12, 12, 12, 12, new java.awt.Color(153, 51, 0)));
-        Pembayaran.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 760, 570));
-
-        jLabel4.setText("Pelanggan Member      : 320.000 / Bulan 8X 2 jam");
-        Pembayaran.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 310, 30));
-
-        jLabel7.setText("Benefit Member    :");
-        Pembayaran.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, 310, 20));
-
-        jLabel9.setText("- Free Peminjaman 2 Raket");
-        Pembayaran.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 240, -1, -1));
-
-        jLabel10.setText("-Free 3 Shuttlecock ");
-        Pembayaran.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, 160, 10));
-
-        jLabel11.setText("-Free 1 Aqua 1L");
-        Pembayaran.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, -1, -1));
-
-        jLabel12.setText("Pelanggan Reguler        : 50.000 / 1 jam");
-        Pembayaran.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 210, -1));
-
-        jLabel13.setText("Benefit Reguler     :");
-        Pembayaran.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, -1, -1));
-
-        jLabel14.setText("- Free 1 Aqua  350ml");
-        Pembayaran.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 620, -1, -1));
-
-        jLabel16.setText("- Free 1 Shuttlecock");
-        Pembayaran.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 620, -1, -1));
-
         getContentPane().add(Pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1560, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void Hitung_PembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Hitung_PembayaranActionPerformed
-                                                 
-    try {
-        // Ambil input dari combo box untuk jenis pelanggan
-        String jenisPelanggan = Jenis_Pelanggan.getSelectedItem().toString();
-        
-        // Ambil input dari text field untuk uang yang diberikan
-        String uangDiberikanInput = UangDiberikan.getText();
-        double uangDiberikan = parseCurrency(uangDiberikanInput); // Panggil fungsi parseCurrency
-        
-        // Variabel harga berdasarkan jenis pelanggan
-        double harga = 0;
-
-        // Tentukan harga berdasarkan jenis pelanggan
-        if (jenisPelanggan.equalsIgnoreCase("Member")) {
-            harga = 320000; // Harga untuk Member
-        } else if (jenisPelanggan.equalsIgnoreCase("Regular")) {
-            harga = 50000; // Harga untuk Regular
-        } else {
-            // Jika jenis pelanggan tidak valid, tampilkan pesan di text field "Kembalian"
-            Kembalian.setText("Jenis pelanggan tidak valid");
-            return;
-        }
-
-        // Cek apakah uang mencukupi
-        if (uangDiberikan < harga) {
-            // Jika uang tidak mencukupi, tampilkan pesan di text field "Kembalian"
-            Kembalian.setText("Uang tidak mencukupi");
-        } else if (uangDiberikan == harga) {
-            // Jika uang tepat, tampilkan pesan pembayaran tepat
-            Kembalian.setText("Pembayaran Tepat");
-        } else {
-            // Hitung kembalian jika uang mencukupi dan tidak tepat
-            double kembalian = uangDiberikan - harga;
-
-            // Menampilkan hasil kembalian dalam format Rp (nominal tanpa desimal)
-            String kembalianStr = String.format("Rp %.0f", kembalian); // Tanpa koma atau simbol lain
-            Kembalian.setText(kembalianStr);
-        }
-    } catch (NumberFormatException | ParseException e) {
-        // Jika input tidak valid, tampilkan pesan error
-        Kembalian.setText("Input tidak valid");
-    } catch (NullPointerException e) {
-        // Jika combo box atau text field kosong
-        Kembalian.setText("Harap lengkapi semua data");
+                                                    
+    // Logika untuk menghitung total pembayaran dan kembalian
+    double harga;
+    if(Jenis_Pelanggan.getSelectedItem().toString().equals("Member")) {
+        harga = hargaMember;
+    } else {
+        harga = hargaRegular;
     }
-}
 
-// Fungsi untuk mengubah input dengan pemisah ribuan ke angka
-private double parseCurrency(String input) throws ParseException {
-    // Menggunakan DecimalFormat untuk format yang lebih tepat
-    DecimalFormat format = new DecimalFormat("#,##0.00");  // Format untuk angka dengan ribuan dan dua digit desimal
-    format.setParseBigDecimal(true);  // Agar format bekerja dengan baik untuk angka besar atau desimal
-    Number number = format.parse(input);
-    return number.doubleValue();  // Mengonversi ke double
+    double uangDiberikan = Double.parseDouble(UangDiberikan.getText());
 
+    if(uangDiberikan < harga) {
+        Kembalian.setText("Uang tidak mencukupi");
+    } else {
+        double kembalian = uangDiberikan - harga;
+        Kembalian.setText(String.format("%.0f", kembalian));
+    }
+
+    
     }//GEN-LAST:event_Hitung_PembayaranActionPerformed
 
     private void Nama_PelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCustom1ActionPerformed
@@ -368,6 +401,13 @@ private double parseCurrency(String input) throws ParseException {
         // TODO add your handling code here:
     }//GEN-LAST:event_Konfirmasi_PembayaranActionPerformed
 
+    private void KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KembaliActionPerformed
+                                               
+    Rental rentalPage = new Rental();
+    rentalPage.setVisible(true);
+    this.dispose(); // Menutup halaman saat ini
+    }//GEN-LAST:event_KembaliActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -410,6 +450,7 @@ private double parseCurrency(String input) throws ParseException {
     private go.Custom.TextFieldCustom ID_Pelanggan;
     private javax.swing.JComboBox<String> Jenis_Lapangan;
     private javax.swing.JComboBox<String> Jenis_Pelanggan;
+    private go.Custom.ButtonCustom Kembali;
     private go.Custom.TextFieldCustom Kembalian;
     private go.Custom.ButtonCustom Konfirmasi_Pembayaran;
     private go.Custom.TextFieldCustom Nama_Pelanggan;
@@ -427,9 +468,8 @@ private double parseCurrency(String input) throws ParseException {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
