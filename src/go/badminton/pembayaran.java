@@ -203,6 +203,7 @@ public class pembayaran extends javax.swing.JFrame {
         });
         Pembayaran.add(Konfirmasi_Pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 640, -1, 40));
 
+        Kembali.setForeground(new java.awt.Color(255, 255, 255));
         Kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/keluar.png"))); // NOI18N
         Kembali.setText("Kembali");
         Kembali.setColor(new java.awt.Color(153, 255, 255));
