@@ -44,20 +44,20 @@ public class Rental extends javax.swing.JFrame {
         Pelanggan_Member = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        Harga = new go.Custom.TextFieldCustom();
+        ID_Pelanggan = new go.Custom.TextFieldCustom();
+        Nama_Pelanggan = new go.Custom.TextFieldCustom();
+        Nomor_Hp = new go.Custom.TextFieldCustom();
+        Alamat = new go.Custom.TextFieldCustom();
+        Durasi_Sewa = new go.Custom.TextFieldCustom();
         jenis_lapangan = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Lapangan = new javax.swing.JComboBox<>();
-        ID_Pelanggan = new javax.swing.JTextField();
-        Nama_Pelanggan = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        Nomor_Hp = new javax.swing.JTextField();
         harga = new javax.swing.JLabel();
-        Harga = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        Alamat = new javax.swing.JTextField();
         durasi_sewa1 = new javax.swing.JLabel();
-        Durasi_Sewa = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Save = new go.Custom.ButtonCustom();
@@ -151,6 +151,29 @@ public class Rental extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(12, 12, 12, 12, new java.awt.Color(51, 204, 255)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        Harga.setRadius(20);
+        Harga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HargaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Harga, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 170, 30));
+
+        ID_Pelanggan.setRadius(20);
+        jPanel2.add(ID_Pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 180, 30));
+
+        Nama_Pelanggan.setRadius(20);
+        jPanel2.add(Nama_Pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 180, 30));
+
+        Nomor_Hp.setRadius(20);
+        jPanel2.add(Nomor_Hp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 180, 30));
+
+        Alamat.setRadius(20);
+        jPanel2.add(Alamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 176, 180, 30));
+
+        Durasi_Sewa.setRadius(20);
+        jPanel2.add(Durasi_Sewa, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 170, 30));
+
         jenis_lapangan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jenis_lapangan.setForeground(new java.awt.Color(255, 255, 255));
         jenis_lapangan.setText("Pilih Lapangan   :");
@@ -179,65 +202,25 @@ public class Rental extends javax.swing.JFrame {
         });
         jPanel2.add(Lapangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 160, -1));
 
-        ID_Pelanggan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel2.add(ID_Pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 180, 30));
-
-        Nama_Pelanggan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Nama_Pelanggan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Nama_PelangganActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Nama_Pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 180, 30));
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("No HP                     :");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 140, 20));
-
-        Nomor_Hp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Nomor_Hp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Nomor_HpActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Nomor_Hp, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 180, 30));
 
         harga.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         harga.setForeground(new java.awt.Color(255, 255, 255));
         harga.setText("Total harga         :");
         jPanel2.add(harga, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, -1, -1));
 
-        Harga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HargaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Harga, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 160, 30));
-
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Alamat                    :");
         jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
-        Alamat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AlamatActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Alamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 180, 30));
-
         durasi_sewa1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         durasi_sewa1.setForeground(new java.awt.Color(255, 255, 255));
         durasi_sewa1.setText("Durasi Sewa       :");
         jPanel2.add(durasi_sewa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, -1, -1));
-
-        Durasi_Sewa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Durasi_SewaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Durasi_Sewa, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 160, 30));
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
         jLabel7.setOpaque(true);
@@ -450,26 +433,6 @@ public class Rental extends javax.swing.JFrame {
 
     }//GEN-LAST:event_UpdateActionPerformed
 
-    private void Nama_PelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nama_PelangganActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Nama_PelangganActionPerformed
-
-    private void Nomor_HpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nomor_HpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Nomor_HpActionPerformed
-
-    private void HargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HargaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_HargaActionPerformed
-
-    private void AlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlamatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AlamatActionPerformed
-
-    private void Durasi_SewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Durasi_SewaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Durasi_SewaActionPerformed
-
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseWheelMoved
@@ -520,7 +483,7 @@ public class Rental extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
         model.addRow(new Object[]{Pelanggan_Member.isSelected(), Pelanggan_Biasa.isSelected(),
             ID_Pelanggan.getText(), Nama_Pelanggan.getText(),
-            Nomor_Hp.getText(), Alamat.getText(), Harga.getText(), Lapangan.getSelectedItem(), Harga.getText(),toString(),});
+            Nomor_Hp.getText(), Alamat.getText(), Durasi_Sewa.getText(), Lapangan.getSelectedItem(), Harga.getText(),toString(),});
 
     
     }//GEN-LAST:event_Show_DetailActionPerformed
@@ -567,6 +530,10 @@ public class Rental extends javax.swing.JFrame {
       
     }//GEN-LAST:event_DeleteActionPerformed
 
+    private void HargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HargaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -603,20 +570,20 @@ public class Rental extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Alamat;
+    private go.Custom.TextFieldCustom Alamat;
     private javax.swing.JLabel BG_hitam;
     private go.Custom.ButtonCustom Bayar;
     private go.Custom.ButtonCustom Clear;
     private javax.swing.JTable Data_Pemesanan;
     private go.Custom.ButtonCustom Delete;
-    private javax.swing.JTextField Durasi_Sewa;
+    private go.Custom.TextFieldCustom Durasi_Sewa;
     private go.Custom.ButtonCustom Exit;
-    private javax.swing.JTextField Harga;
-    private javax.swing.JTextField ID_Pelanggan;
+    private go.Custom.TextFieldCustom Harga;
+    private go.Custom.TextFieldCustom ID_Pelanggan;
     private go.Custom.ButtonCustom Konfirmasi_Sewa;
     private javax.swing.JComboBox<String> Lapangan;
-    private javax.swing.JTextField Nama_Pelanggan;
-    private javax.swing.JTextField Nomor_Hp;
+    private go.Custom.TextFieldCustom Nama_Pelanggan;
+    private go.Custom.TextFieldCustom Nomor_Hp;
     private javax.swing.JCheckBox Pelanggan_Biasa;
     private javax.swing.JCheckBox Pelanggan_Member;
     private go.Custom.ButtonCustom Reset;
