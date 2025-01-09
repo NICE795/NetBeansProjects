@@ -1,5 +1,6 @@
 package go.badminton;
 
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -8,6 +9,13 @@ import javax.swing.JRadioButton;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
 
 
 public class Rental extends javax.swing.JFrame {
@@ -61,6 +69,7 @@ public class Rental extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Save = new go.Custom.ButtonCustom();
+        Update = new go.Custom.ButtonCustom();
         Reset = new go.Custom.ButtonCustom();
         Clear = new go.Custom.ButtonCustom();
         Bayar = new go.Custom.ButtonCustom();
@@ -69,7 +78,6 @@ public class Rental extends javax.swing.JFrame {
         Exit = new go.Custom.ButtonCustom();
         Delete = new go.Custom.ButtonCustom();
         jLabel16 = new javax.swing.JLabel();
-        Update = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -245,7 +253,22 @@ public class Rental extends javax.swing.JFrame {
                 SaveActionPerformed(evt);
             }
         });
-        jPanel4.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 40));
+        jPanel4.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 30));
+
+        Update.setForeground(new java.awt.Color(255, 255, 255));
+        Update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/panah atas.png"))); // NOI18N
+        Update.setText("Update");
+        Update.setColor(new java.awt.Color(102, 153, 255));
+        Update.setColorBorder(new java.awt.Color(51, 51, 255));
+        Update.setColorClick(new java.awt.Color(0, 0, 255));
+        Update.setColorOver(new java.awt.Color(102, 102, 255));
+        Update.setRadius(20);
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 30));
 
         Reset.setForeground(new java.awt.Color(255, 255, 255));
         Reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reset.png"))); // NOI18N
@@ -261,7 +284,7 @@ public class Rental extends javax.swing.JFrame {
                 ResetActionPerformed(evt);
             }
         });
-        jPanel4.add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 100, 40));
+        jPanel4.add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 100, 30));
 
         Clear.setForeground(new java.awt.Color(255, 255, 255));
         Clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sapu.png"))); // NOI18N
@@ -276,7 +299,7 @@ public class Rental extends javax.swing.JFrame {
                 ClearActionPerformed(evt);
             }
         });
-        jPanel4.add(Clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 100, 30));
+        jPanel4.add(Clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 100, 30));
 
         Bayar.setForeground(new java.awt.Color(255, 255, 255));
         Bayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/uang.png"))); // NOI18N
@@ -291,7 +314,7 @@ public class Rental extends javax.swing.JFrame {
                 BayarActionPerformed(evt);
             }
         });
-        jPanel4.add(Bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 100, 30));
+        jPanel4.add(Bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 100, 30));
 
         Konfirmasi_Sewa.setForeground(new java.awt.Color(255, 255, 255));
         Konfirmasi_Sewa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/centang.png"))); // NOI18N
@@ -361,14 +384,6 @@ public class Rental extends javax.swing.JFrame {
         jLabel16.setOpaque(true);
         jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 220));
 
-        Update.setText("Update");
-        Update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateActionPerformed(evt);
-            }
-        });
-        jPanel4.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 80, -1));
-
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setOpaque(true);
         jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 220));
@@ -384,11 +399,11 @@ public class Rental extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Pelanggan Member", "Pelanggan Biasa", "ID*", "Nama Pelanggan", "Nomor Hp", "Alamat", "Durasi Sewa", "Lapangan", "Total Harga"
+                "tipe Pelanggan", "ID*", "Nama Pelanggan", "Nomor Hp", "Alamat", "Durasi Sewa", "Lapangan", "Total Harga"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -421,18 +436,6 @@ public class Rental extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_LapanganPropertyChange
 
-    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
-       DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
-       if (Data_Pemesanan.getRowCount() == 0) {
-        JOptionPane.showMessageDialog(null, "Tidak ada data dalam sistem sewa", "", JOptionPane.WARNING_MESSAGE);
-        } else if (Data_Pemesanan.getSelectedRow() == -1) {
-        JOptionPane.showMessageDialog(null, "Silakan pilih baris untuk diperbarui", "", JOptionPane.WARNING_MESSAGE);
-        } else {
-         JOptionPane.showMessageDialog(null, "Sistem sewa berhasil diupdate", "", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-    }//GEN-LAST:event_UpdateActionPerformed
-
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseWheelMoved
@@ -442,7 +445,88 @@ public class Rental extends javax.swing.JFrame {
     }//GEN-LAST:event_Pelanggan_MemberActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-        JOptionPane.showMessageDialog(null, "Berhasil di save", "", JOptionPane.OK_CANCEL_OPTION);
+                                    
+    String namaCustomer = Nama_Pelanggan.getText();
+    String noTlp = Nomor_Hp.getText();
+    String alamat = Alamat.getText();
+    
+    // Validasi jika field kosong
+    if (namaCustomer.isEmpty() || noTlp.isEmpty() || alamat.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Harap mengisi semua field!");
+        return;
+    }
+
+    // Mengambil nilai dari Checkbox
+    String tipeCustomer = "";
+    if (Pelanggan_Biasa.isSelected()) {
+        tipeCustomer = "Pelanggan Biasa";
+    } else if (Pelanggan_Member.isSelected()) {
+        tipeCustomer = "Pelanggan Member";
+    }
+
+    // Mengambil nilai dari JComboBox
+    String tipeLapangan = (String) Lapangan.getSelectedItem();
+    
+    // Memisahkan waktu sewa menjadi waktu mulai dan waktu selesai
+    String waktuSewa = Durasi_Sewa.getText(); // Format "07.00-08.00"
+    String[] waktuSewaSplit = waktuSewa.split("-");
+    String startTimeStr = waktuSewaSplit[0].replace(".", ":"); // Mengubah format menjadi "07:00"
+    String endTimeStr = waktuSewaSplit[1].replace(".", ":"); // Mengubah format menjadi "08:00"
+
+    // Mengonversi string ke java.sql.Time
+    java.sql.Time waktuSewaTime = java.sql.Time.valueOf(startTimeStr + ":00");
+    
+    // Mengambil totalHarga dan validasi untuk BIGINT
+    String totalHarga = Harga.getText();
+    long harga = 0;
+    try {
+        harga = Long.parseLong(totalHarga); // Mengkonversi String ke long
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Total Harga harus berupa angka valid!", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Hentikan proses jika input tidak valid
+    }
+
+    // Validasi jika data kosong
+    if (waktuSewa.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Harap mengisi waktu sewa!");
+        return;
+    }
+
+    // Mengambil nilai dari JTable Data_Pemesanan
+    StringBuilder keteranganBuilder = new StringBuilder();
+    for (int row = 0; row < Data_Pemesanan.getRowCount(); row++) {
+        for (int column = 0; column < Data_Pemesanan.getColumnCount(); column++) {
+            keteranganBuilder.append(Data_Pemesanan.getValueAt(row, column).toString()).append(" ");
+        }
+        keteranganBuilder.append("\n");
+    }
+    String keterangan = keteranganBuilder.toString();
+
+    // Memastikan koneksi ke database dan query
+    try (Connection conn = DatabaseConnection.getConnection()) {
+        if (conn != null) {
+            String sql = "INSERT INTO t_customer (nama_customer, no_tlp, alamat, tipe_customer, tipe_lapangan, waktu_sewa, total_harga, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, namaCustomer);
+            stmt.setString(2, noTlp);
+            stmt.setString(3, alamat);
+            stmt.setString(4, tipeCustomer);
+            stmt.setString(5, tipeLapangan);
+            stmt.setTime(6, waktuSewaTime); // Menggunakan tipe data TIME
+            stmt.setLong(7, harga); // Menyimpan harga sebagai long (untuk BIGINT)
+            stmt.setString(8, keterangan);
+            
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Data penyewaan berhasil disimpan!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Koneksi ke database gagal!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (SQLException e) {
+        // Menampilkan detail error
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menyimpan data penyewaan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_SaveActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
@@ -479,13 +563,37 @@ public class Rental extends javax.swing.JFrame {
     }//GEN-LAST:event_ClearActionPerformed
 
     private void Show_DetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Show_DetailActionPerformed
-                                                        
-        DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
-        model.addRow(new Object[]{Pelanggan_Member.isSelected(), Pelanggan_Biasa.isSelected(),
-            ID_Pelanggan.getText(), Nama_Pelanggan.getText(),
-            Nomor_Hp.getText(), Alamat.getText(), Durasi_Sewa.getText(), Lapangan.getSelectedItem(), Harga.getText(),toString(),});
+                                           
+    DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
+    model.setRowCount(0); // Membersihkan tabel sebelum mengisi data baru
 
-    
+    try (Connection conn = DatabaseConnection.getConnection()) {
+        if (conn != null) {
+            String sql = "SELECT * FROM t_customer";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(); // Inisialisasi ResultSet setelah mengeksekusi query
+
+            while (rs.next()) {
+                Object[] row = {
+                    rs.getInt("id_customer"),
+                    rs.getString("nama_customer"),
+                    rs.getString("no_tlp"),
+                    rs.getString("alamat"),
+                    rs.getString("tipe_customer"),
+                    rs.getString("tipe_lapangan"),
+                    rs.getTime("waktu_sewa").toString(),
+                    rs.getLong("total_harga"),
+                    rs.getString("keterangan")
+                };
+                model.addRow(row);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Koneksi ke database gagal!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat mengambil data dari database: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_Show_DetailActionPerformed
 
     private void BayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BayarActionPerformed
@@ -533,6 +641,19 @@ public class Rental extends javax.swing.JFrame {
     private void HargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HargaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_HargaActionPerformed
+
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+                                                  
+       DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
+       if (Data_Pemesanan.getRowCount() == 0) {
+        JOptionPane.showMessageDialog(null, "Tidak ada data dalam sistem sewa", "", JOptionPane.WARNING_MESSAGE);
+        } else if (Data_Pemesanan.getSelectedRow() == -1) {
+        JOptionPane.showMessageDialog(null, "Silakan pilih baris untuk diperbarui", "", JOptionPane.WARNING_MESSAGE);
+        } else {
+         JOptionPane.showMessageDialog(null, "Sistem sewa berhasil diupdate", "", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_UpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -589,7 +710,7 @@ public class Rental extends javax.swing.JFrame {
     private go.Custom.ButtonCustom Reset;
     private go.Custom.ButtonCustom Save;
     private go.Custom.ButtonCustom Show_Detail;
-    private javax.swing.JButton Update;
+    private go.Custom.ButtonCustom Update;
     private javax.swing.JLabel durasi_sewa1;
     private javax.swing.JLabel harga;
     private javax.swing.JLabel jLabel1;

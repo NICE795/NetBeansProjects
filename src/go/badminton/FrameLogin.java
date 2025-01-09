@@ -1,14 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package go.badminton;
 
 import javax.swing.JOptionPane;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class FrameLogin extends javax.swing.JFrame {
 
@@ -31,10 +28,10 @@ public class FrameLogin extends javax.swing.JFrame {
         password = new javax.swing.JLabel();
         silahkan_login = new javax.swing.JLabel();
         username = new javax.swing.JLabel();
-        Password = new go.Custom.TextFieldCustom();
         Login = new go.Custom.ButtonCustom();
         Username = new go.Custom.TextFieldCustom();
         Keluar = new go.Custom.ButtonCustom();
+        Password = new go.Custom.PasswordCustom();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,15 +73,6 @@ public class FrameLogin extends javax.swing.JFrame {
         username.setText("Username        :");
         panelCustom1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 170, 30));
 
-        Password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Password.setRadius(20);
-        Password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordActionPerformed(evt);
-            }
-        });
-        panelCustom1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 280, 40));
-
         Login.setBackground(new java.awt.Color(60, 85, 45));
         Login.setForeground(new java.awt.Color(255, 255, 255));
         Login.setText("LOGIN");
@@ -124,6 +112,7 @@ public class FrameLogin extends javax.swing.JFrame {
             }
         });
         panelCustom1.add(Keluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 150, 50));
+        panelCustom1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 280, 40));
 
         jPanel1.add(panelCustom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 590, 410));
 
@@ -159,61 +148,37 @@ public class FrameLogin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_UsernameActionPerformed
 
-    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
-                                       
-    if (Password.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Password harus diisi", "Warning", JOptionPane.WARNING_MESSAGE);
-    } else {
-        String inputPassword = Password.getText().trim();
-        String correctPassword = "yourCorrectPassword"; // Ganti dengan password yang benar
-
-        if (!inputPassword.equals(correctPassword)) {
-            JOptionPane.showMessageDialog(this, "Password salah", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            // TODO add your handling code here jika password benar
-        }
-    }
-
-
-    }//GEN-LAST:event_PasswordActionPerformed
-
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
                                     
-    String username = Username.getText().trim();
-    String password = new String(Password.getText()).trim();
-    
-    if (username.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Username harus diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+    String user = Username.getText();
+    char[] pass = Password.getPassword();
+
+    if (user.isEmpty() || pass.length == 0) {
+        JOptionPane.showMessageDialog(this, "Username dan Password harus diisi", "Warning", JOptionPane.WARNING_MESSAGE);
         return;
     }
-    
-    if (password.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Password harus diisi", "Warning", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    try {
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourDatabase", "username", "password");
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setString(1, username);
-        pst.setString(2, password);
-        ResultSet rs = pst.executeQuery();
-        
+
+    try (Connection conn = DatabaseConnection.getConnection()) {
+        String sql = "SELECT * FROM t_pegawai WHERE email = ? AND password = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, user);
+        stmt.setString(2, new String(pass)); // Konversi char[] ke String
+
+        ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
-            // Login berhasil, buka halaman Rental.java
             JOptionPane.showMessageDialog(this, "Login berhasil!");
-            Rental rentalPage = new Rental();
-            rentalPage.setVisible(true);
-            this.dispose(); // Menutup halaman login saat ini
+            Rental rental = new Rental(); // Pindah ke Rental.java
+            rental.setVisible(true);
+            this.dispose();
         } else {
-            // Login gagal
-            JOptionPane.showMessageDialog(this, "Username atau password salah", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Username atau Password salah", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-    } catch (Exception e) {
+    } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menghubungi database", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Terjadi kesalahan pada koneksi database", "Error", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        // Hapus isi array karakter untuk keamanan
+        java.util.Arrays.fill(pass, ' ');
     }
     }//GEN-LAST:event_LoginActionPerformed
 
@@ -262,7 +227,7 @@ public class FrameLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private go.Custom.ButtonCustom Keluar;
     private go.Custom.ButtonCustom Login;
-    private go.Custom.TextFieldCustom Password;
+    private go.Custom.PasswordCustom Password;
     private go.Custom.TextFieldCustom Username;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
