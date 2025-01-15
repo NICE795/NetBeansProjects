@@ -27,7 +27,7 @@ public class FrameLogin extends javax.swing.JFrame {
         panelCustom1 = new go.Custom.PanelCustom();
         password = new javax.swing.JLabel();
         silahkan_login = new javax.swing.JLabel();
-        username = new javax.swing.JLabel();
+        email = new javax.swing.JLabel();
         Login = new go.Custom.ButtonCustom();
         Username = new go.Custom.TextFieldCustom();
         Keluar = new go.Custom.ButtonCustom();
@@ -61,17 +61,17 @@ public class FrameLogin extends javax.swing.JFrame {
         password.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         password.setForeground(new java.awt.Color(255, 255, 255));
         password.setText("Password         :");
-        panelCustom1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 150, 30));
+        panelCustom1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 150, 30));
 
         silahkan_login.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         silahkan_login.setForeground(new java.awt.Color(255, 255, 255));
         silahkan_login.setText("LOGIN ADMIN");
         panelCustom1.add(silahkan_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 140, 50));
 
-        username.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        username.setForeground(new java.awt.Color(255, 255, 255));
-        username.setText("Username        :");
-        panelCustom1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 170, 30));
+        email.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        email.setForeground(new java.awt.Color(255, 255, 255));
+        email.setText("Email                :");
+        panelCustom1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 170, 30));
 
         Login.setBackground(new java.awt.Color(60, 85, 45));
         Login.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,7 +112,9 @@ public class FrameLogin extends javax.swing.JFrame {
             }
         });
         panelCustom1.add(Keluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 150, 50));
-        panelCustom1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 280, 40));
+
+        Password.setRadius(20);
+        panelCustom1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 280, 40));
 
         jPanel1.add(panelCustom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 590, 410));
 
@@ -229,11 +231,11 @@ public class FrameLogin extends javax.swing.JFrame {
     private go.Custom.ButtonCustom Login;
     private go.Custom.PasswordCustom Password;
     private go.Custom.TextFieldCustom Username;
+    private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private go.Custom.PanelCustom panelCustom1;
     private javax.swing.JLabel password;
     private javax.swing.JLabel silahkan_login;
-    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

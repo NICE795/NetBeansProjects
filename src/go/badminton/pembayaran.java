@@ -62,7 +62,7 @@ public class pembayaran extends javax.swing.JFrame {
         Jumlah_Dibayarkan = new go.Custom.TextFieldCustom();
         Total_Transaksi = new go.Custom.TextFieldCustom();
         Kembalian = new go.Custom.TextFieldCustom();
-        ID_Pelanggan = new go.Custom.TextFieldCustom();
+        ID_Transaksi = new go.Custom.TextFieldCustom();
         Tanggal = new go.Custom.TextFieldCustom();
         panelCustom1 = new go.Custom.PanelCustom();
         jLabel10 = new javax.swing.JLabel();
@@ -101,7 +101,7 @@ public class pembayaran extends javax.swing.JFrame {
 
         pegawai.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         pegawai.setForeground(new java.awt.Color(255, 255, 255));
-        pegawai.setText("ID Pegawai                        : ");
+        pegawai.setText("Nama Pegawai                  : ");
         Pembayaran.add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 190, -1));
 
         id_pelanggan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -147,7 +147,7 @@ public class pembayaran extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "pegawai", "Pembayaran", "Lapangan", "Nama Pelanggan", "J Pelanggan ", "ID", "Tanggal", "T Pembayaran", "U Diberikan", "Kembalian"
+                "pegawai", "Pembayaran", "ID", "Nama Pelanggan", "Jenis Pelanggan ", "Lapangan", "Tanggal", "Total Pembayaran", "Uang Diberikan", "Kembalian"
             }
         ) {
             Class[] types = new Class [] {
@@ -212,13 +212,21 @@ public class pembayaran extends javax.swing.JFrame {
         });
         Pembayaran.add(Hitung_Pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 310, 150, 40));
 
+        Save.setForeground(new java.awt.Color(255, 255, 255));
+        Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         Save.setText("Save");
+        Save.setColor(new java.awt.Color(51, 153, 255));
+        Save.setColorBorder(new java.awt.Color(0, 102, 255));
+        Save.setColorClick(new java.awt.Color(51, 51, 255));
+        Save.setColorOver(new java.awt.Color(51, 51, 255));
+        Save.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Save.setRadius(20);
         Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveActionPerformed(evt);
             }
         });
-        Pembayaran.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 280, 100, -1));
+        Pembayaran.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 260, 100, -1));
 
         Konfirmasi_Pembayaran.setForeground(new java.awt.Color(255, 255, 255));
         Konfirmasi_Pembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/centang.png"))); // NOI18N
@@ -234,7 +242,7 @@ public class pembayaran extends javax.swing.JFrame {
                 Konfirmasi_PembayaranActionPerformed(evt);
             }
         });
-        Pembayaran.add(Konfirmasi_Pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 410, 310, 40));
+        Pembayaran.add(Konfirmasi_Pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 410, 300, 40));
 
         Kembali.setForeground(new java.awt.Color(255, 255, 255));
         Kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/keluar.png"))); // NOI18N
@@ -300,8 +308,8 @@ public class pembayaran extends javax.swing.JFrame {
         });
         Pembayaran.add(Kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, 210, 40));
 
-        ID_Pelanggan.setRadius(20);
-        Pembayaran.add(ID_Pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 210, 40));
+        ID_Transaksi.setRadius(20);
+        Pembayaran.add(ID_Transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 210, 40));
 
         Tanggal.setRadius(20);
         Pembayaran.add(Tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 210, 40));
@@ -349,7 +357,7 @@ public class pembayaran extends javax.swing.JFrame {
         jLabel5.setText("- Free 1 Shuttlecock");
         panelCustom1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
-        Pembayaran.add(panelCustom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 160, 320, 210));
+        Pembayaran.add(panelCustom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 160, 320, 210));
 
         bingkaicoklat1.setBorder(javax.swing.BorderFactory.createMatteBorder(12, 12, 12, 12, new java.awt.Color(153, 51, 0)));
         Pembayaran.add(bingkaicoklat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1530, 570));
@@ -397,7 +405,7 @@ public class pembayaran extends javax.swing.JFrame {
     DefaultTableModel model = (DefaultTableModel) Tabel_Detail.getModel();
     model.setRowCount(0); // Membersihkan tabel sebelum menambah data baru
 
-    String sql = "SELECT pegawai, pilih_transaksi, nama_customer, tipe_customer, tanggal, total_transaksi, jumlah_dibayarkan, kembalian, lapangan FROM t_transaksi";
+    String sql = "SELECT pegawai, pilih_transaksi, nama_customer, tipe_customer, tanggal, total_transaksi, jumlah_dibayarkan, kembalian, lapangan, id_transaksi FROM t_transaksi";
 
     try (Connection conn = DatabaseConnection.getConnection(); 
             PreparedStatement statement = conn.prepareStatement(sql); 
@@ -406,15 +414,18 @@ public class pembayaran extends javax.swing.JFrame {
         while (resultSet.next()) {
             String pegawai = resultSet.getString("pegawai");
             String pembayaran = resultSet.getString("pilih_transaksi");
+            String jenisLapangan = resultSet.getString("lapangan");
             String namaPelanggan = resultSet.getString("nama_customer");
             String jenisPelanggan = resultSet.getString("tipe_customer");
+            String idtransaksi = resultSet.getString("id_transaksi");
             String tanggal = resultSet.getString("tanggal");
             String totalTransaksi = resultSet.getString("total_transaksi");
             String jumlahDibayarkan = resultSet.getString("jumlah_dibayarkan");
             String kembalian = resultSet.getString("kembalian");
-            String jenisLapangan = resultSet.getString("lapangan");
+            
+            
 
-            model.addRow(new Object[]{pegawai, pembayaran, namaPelanggan, jenisPelanggan, tanggal, totalTransaksi, jumlahDibayarkan, kembalian, jenisLapangan});
+            model.addRow(new Object[]{pegawai, pembayaran, idtransaksi, namaPelanggan, jenisPelanggan, jenisLapangan, tanggal, totalTransaksi, jumlahDibayarkan, kembalian});
         }
     } catch (SQLException e) {
         e.printStackTrace();
@@ -423,33 +434,45 @@ public class pembayaran extends javax.swing.JFrame {
     }//GEN-LAST:event_Show_DetailActionPerformed
 
     private void HapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusActionPerformed
-                                                   
+        
     DefaultTableModel model = (DefaultTableModel) Tabel_Detail.getModel();
-    model.setRowCount(0); // Membersihkan tabel sebelum menambah data baru
 
-    String sql = "SELECT pegawai, pilih_transaksi, nama_customer, tipe_customer, tanggal, total_transaksi, jumlah_dibayarkan, kembalian, lapangan FROM t_transaksi";
+    // Mendapatkan baris yang dipilih
+    int selectedRow = Tabel_Detail.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(null, "Pilih baris yang akan dihapus!");
+        return;
+    }
 
-    try (Connection conn = DatabaseConnection.getConnection(); 
-         PreparedStatement statement = conn.prepareStatement(sql); 
-         ResultSet resultSet = statement.executeQuery()) {
+    // Mendapatkan ID transaksi dari baris yang dipilih
+    String idTransaksi = model.getValueAt(selectedRow, 2).toString();
 
-        while (resultSet.next()) {
-            String pegawai = resultSet.getString("pegawai");
-            String pembayaran = resultSet.getString("pilih_transaksi");
-            String namaPelanggan = resultSet.getString("nama_customer");
-            String jenisPelanggan = resultSet.getString("tipe_customer");
-            String tanggal = resultSet.getString("tanggal");
-            String totalTransaksi = resultSet.getString("total_transaksi");
-            String jumlahDibayarkan = resultSet.getString("jumlah_dibayarkan");
-            String kembalian = resultSet.getString("kembalian");
-            String jenisLapangan = resultSet.getString("lapangan");
+    // Konfirmasi penghapusan
+    int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+    if (confirm != JOptionPane.YES_OPTION) {
+        return;
+    }
 
-            model.addRow(new Object[]{pegawai, pembayaran, namaPelanggan, jenisPelanggan, tanggal, totalTransaksi, jumlahDibayarkan, kembalian, jenisLapangan});
+    // Perintah SQL untuk menghapus data berdasarkan ID transaksi
+    String sqlDelete = "DELETE FROM t_transaksi WHERE id_transaksi = ?";
+
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement statement = conn.prepareStatement(sqlDelete)) {
+        statement.setString(1, idTransaksi);
+
+        // Eksekusi perintah SQL
+        int rowsAffected = statement.executeUpdate();
+
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.");
+            model.removeRow(selectedRow); // Hapus baris dari tabel
+        } else {
+            JOptionPane.showMessageDialog(null, "Gagal menghapus data.");
         }
     } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Gagal mengambil data dari database.");
-    }                                      
+        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data dari database.");
+    }
     }//GEN-LAST:event_HapusActionPerformed
 
     private void Total_TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Total_TransaksiActionPerformed
@@ -480,18 +503,20 @@ public class pembayaran extends javax.swing.JFrame {
     }//GEN-LAST:event_KembaliActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-                                          
+        
     String pegawai = Pegawai.getText();
     String pembayaran = (String) Pilih_Pembayaran.getSelectedItem();
+    String lapangan = (String) Jenis_Lapangan.getSelectedItem();
     String namaPelanggan = Nama_Pelanggan.getText();
     String jenisPelanggan = (String) Jenis_Pelanggan.getSelectedItem();
+    String idTransaksi = ID_Transaksi.getText();
     String tanggalInput = Tanggal.getText();
     String totalTransaksi = Total_Transaksi.getText();
     String jumlahDibayarkan = Jumlah_Dibayarkan.getText();
     String kembalian = Kembalian.getText();
-    String lapangan = (String) Jenis_Lapangan.getSelectedItem(); // Memastikan lapangan diambil dengan benar
+    
 
-    if (pegawai.isEmpty() || pembayaran == null || namaPelanggan.isEmpty() || jenisPelanggan == null || tanggalInput.isEmpty() || totalTransaksi.isEmpty() || jumlahDibayarkan.isEmpty() || kembalian.isEmpty() || lapangan == null) {
+    if (pegawai.isEmpty() || pembayaran == null || namaPelanggan.isEmpty() || jenisPelanggan == null || tanggalInput.isEmpty() || totalTransaksi.isEmpty() || jumlahDibayarkan.isEmpty() || idTransaksi.isEmpty() || kembalian.isEmpty() || lapangan == null) {
         JOptionPane.showMessageDialog(null, "Semua field harus diisi.");
         return;
     }
@@ -512,18 +537,21 @@ public class pembayaran extends javax.swing.JFrame {
         pembayaran = pembayaran.substring(0, 20);
     }
 
-    String sql = "INSERT INTO t_transaksi (pegawai, pilih_transaksi, nama_customer, tipe_customer, tanggal, total_transaksi, jumlah_dibayarkan, kembalian, lapangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO t_transaksi (id_transaksi, pegawai, pilih_transaksi, nama_customer, tipe_customer, tanggal, total_transaksi, jumlah_dibayarkan, kembalian, lapangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
-        statement.setString(1, pegawai);
-        statement.setString(2, pembayaran);
-        statement.setString(3, namaPelanggan);
-        statement.setString(4, jenisPelanggan);
-        statement.setString(5, formattedTanggal);
-        statement.setString(6, totalTransaksi);
-        statement.setString(7, jumlahDibayarkan);
-        statement.setString(8, kembalian);
-        statement.setString(9, lapangan);
+        
+        statement.setString(2, pegawai);
+        statement.setString(3, pembayaran);
+        statement.setString(10, lapangan);
+        statement.setString(4, namaPelanggan);
+        statement.setString(5, jenisPelanggan);
+        statement.setString(1, idTransaksi); // Mengambil ID dari input
+        statement.setString(6, formattedTanggal);
+        statement.setString(7, totalTransaksi);
+        statement.setString(8, jumlahDibayarkan);
+        statement.setString(9, kembalian);
+        
 
         int rowsInserted = statement.executeUpdate();
         if (rowsInserted > 0) {
@@ -579,7 +607,7 @@ public class pembayaran extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private go.Custom.ButtonCustom Hapus;
     private go.Custom.ButtonCustom Hitung_Pembayaran;
-    private go.Custom.TextFieldCustom ID_Pelanggan;
+    private go.Custom.TextFieldCustom ID_Transaksi;
     private javax.swing.JComboBox<String> Jenis_Lapangan;
     private javax.swing.JComboBox<String> Jenis_Pelanggan;
     private go.Custom.TextFieldCustom Jumlah_Dibayarkan;
