@@ -445,87 +445,48 @@ public class Rental extends javax.swing.JFrame {
     }//GEN-LAST:event_Pelanggan_MemberActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-                                    
-    String namaCustomer = Nama_Pelanggan.getText();
-    String noTlp = Nomor_Hp.getText();
-    String alamat = Alamat.getText();
-    
-    // Validasi jika field kosong
-    if (namaCustomer.isEmpty() || noTlp.isEmpty() || alamat.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Harap mengisi semua field!");
-        return;
-    }
-
-    // Mengambil nilai dari Checkbox
-    String tipeCustomer = "";
-    if (Pelanggan_Biasa.isSelected()) {
-        tipeCustomer = "Pelanggan Biasa";
-    } else if (Pelanggan_Member.isSelected()) {
-        tipeCustomer = "Pelanggan Member";
-    }
-
-    // Mengambil nilai dari JComboBox
-    String tipeLapangan = (String) Lapangan.getSelectedItem();
-    
-    // Memisahkan waktu sewa menjadi waktu mulai dan waktu selesai
-    String waktuSewa = Durasi_Sewa.getText(); // Format "07.00-08.00"
-    String[] waktuSewaSplit = waktuSewa.split("-");
-    String startTimeStr = waktuSewaSplit[0].replace(".", ":"); // Mengubah format menjadi "07:00"
-    String endTimeStr = waktuSewaSplit[1].replace(".", ":"); // Mengubah format menjadi "08:00"
-
-    // Mengonversi string ke java.sql.Time
-    java.sql.Time waktuSewaTime = java.sql.Time.valueOf(startTimeStr + ":00");
-    
-    // Mengambil totalHarga dan validasi untuk BIGINT
-    String totalHarga = Harga.getText();
-    long harga = 0;
-    try {
-        harga = Long.parseLong(totalHarga); // Mengkonversi String ke long
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Total Harga harus berupa angka valid!", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Hentikan proses jika input tidak valid
-    }
-
-    // Validasi jika data kosong
-    if (waktuSewa.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Harap mengisi waktu sewa!");
-        return;
-    }
-
-    // Mengambil nilai dari JTable Data_Pemesanan
-    StringBuilder keteranganBuilder = new StringBuilder();
-    for (int row = 0; row < Data_Pemesanan.getRowCount(); row++) {
-        for (int column = 0; column < Data_Pemesanan.getColumnCount(); column++) {
-            keteranganBuilder.append(Data_Pemesanan.getValueAt(row, column).toString()).append(" ");
-        }
-        keteranganBuilder.append("\n");
-    }
-    String keterangan = keteranganBuilder.toString();
-
-    // Memastikan koneksi ke database dan query
+                                            
     try (Connection conn = DatabaseConnection.getConnection()) {
         if (conn != null) {
-            String sql = "INSERT INTO t_customer (nama_customer, no_tlp, alamat, tipe_customer, tipe_lapangan, waktu_sewa, total_harga, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO t_customer (id_customer, tipe_customer, nama_customer, no_tlp, alamat, tipe_lapangan, waktu_sewa, total_harga) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, namaCustomer);
-            stmt.setString(2, noTlp);
-            stmt.setString(3, alamat);
-            stmt.setString(4, tipeCustomer);
-            stmt.setString(5, tipeLapangan);
-            stmt.setTime(6, waktuSewaTime); // Menggunakan tipe data TIME
-            stmt.setLong(7, harga); // Menyimpan harga sebagai long (untuk BIGINT)
-            stmt.setString(8, keterangan);
-            
 
-            stmt.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Data penyewaan berhasil disimpan!");
+            // Mengambil data dari form input
+            int idCustomer = Integer.parseInt(ID_Pelanggan.getText()); // Mengambil ID dari input
+            String tipeCustomer = "";
+            if (Pelanggan_Member.isSelected()) {
+                tipeCustomer = "Member";
+            } else if (Pelanggan_Biasa.isSelected()) {
+                tipeCustomer = "Biasa";
+            }
+            String namaCustomer = Nama_Pelanggan.getText();
+            String noTlp = Nomor_Hp.getText();
+            String alamat = Alamat.getText();
+            String tipeLapangan = Lapangan.getSelectedItem().toString();
+            String waktuSewa = Durasi_Sewa.getText(); // Format waktu '08.00-09.00' atau '09.00-10.00'
+            long totalHarga = Long.parseLong(Harga.getText());
+
+            // Mengatur parameter untuk statement
+            stmt.setInt(1, idCustomer);
+            stmt.setString(2, tipeCustomer);
+            stmt.setString(3, namaCustomer);
+            stmt.setString(4, noTlp);
+            stmt.setString(5, alamat);
+            stmt.setString(6, tipeLapangan);
+            stmt.setString(7, waktuSewa);
+            stmt.setLong(8, totalHarga);
+
+            // Menjalankan statement
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(this, "Data berhasil disimpan!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Koneksi ke database gagal!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     } catch (SQLException e) {
-        // Menampilkan detail error
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menyimpan data penyewaan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menyimpan data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_SaveActionPerformed
 
@@ -563,36 +524,31 @@ public class Rental extends javax.swing.JFrame {
     }//GEN-LAST:event_ClearActionPerformed
 
     private void Show_DetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Show_DetailActionPerformed
-                                           
+                                                    
     DefaultTableModel model = (DefaultTableModel) Data_Pemesanan.getModel();
-    model.setRowCount(0); // Membersihkan tabel sebelum mengisi data baru
+    model.setRowCount(0); // Membersihkan tabel sebelum menambah data baru
 
-    try (Connection conn = DatabaseConnection.getConnection()) {
-        if (conn != null) {
-            String sql = "SELECT * FROM t_customer";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery(); // Inisialisasi ResultSet setelah mengeksekusi query
+    String sql = "SELECT id_customer, tipe_customer, nama_customer, no_tlp, alamat, tipe_lapangan, waktu_sewa, total_harga FROM t_customer";
 
-            while (rs.next()) {
-                Object[] row = {
-                    rs.getInt("id_customer"),
-                    rs.getString("nama_customer"),
-                    rs.getString("no_tlp"),
-                    rs.getString("alamat"),
-                    rs.getString("tipe_customer"),
-                    rs.getString("tipe_lapangan"),
-                    rs.getTime("waktu_sewa").toString(),
-                    rs.getLong("total_harga"),
-                    rs.getString("keterangan")
-                };
-                model.addRow(row);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Koneksi ke database gagal!", "Error", JOptionPane.ERROR_MESSAGE);
+    try (Connection conn = DatabaseConnection.getConnection(); 
+            PreparedStatement statement = conn.prepareStatement(sql); 
+            ResultSet resultSet = statement.executeQuery()) {
+
+        while (resultSet.next()) {
+            int idCustomer = resultSet.getInt("id_customer");
+            String tipeCustomer = resultSet.getString("tipe_customer");
+            String namaCustomer = resultSet.getString("nama_customer");
+            String noTlp = resultSet.getString("no_tlp");
+            String alamat = resultSet.getString("alamat");
+            String tipeLapangan = resultSet.getString("tipe_lapangan");
+            String waktuSewa = resultSet.getString("waktu_sewa").toString();
+            long totalHarga = resultSet.getLong("total_harga");
+
+            model.addRow(new Object[]{idCustomer, tipeCustomer, namaCustomer, noTlp, alamat, tipeLapangan, waktuSewa, totalHarga});
         }
     } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat mengambil data dari database: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Gagal mengambil data dari database.");
     }
     }//GEN-LAST:event_Show_DetailActionPerformed
 
